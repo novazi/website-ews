@@ -82,7 +82,7 @@ def gagal():
 # Route untuk Index
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('https://github.com/novazi/website-ews.github.io/blob/main/templates/index.html')
 
 # Route untuk Menambahkan data ke Tabel Lokasi
 @app.route('/add_lokasi', methods = ["POST"])
@@ -172,7 +172,7 @@ def home():
                 'waktu' : b[1],
                 'pergeseran' : b[2],
             })
-        return render_template('home.html', data=data, data_api=data_api)
+        return render_template('https://github.com/novazi/website-ews.github.io/blob/main/templates/home.html', data=data, data_api=data_api)
    
     else:
         return redirect(url_for('login'))
@@ -224,7 +224,7 @@ def semuadata():
                 'waktu' : b[1],
                 'pergeseran' : b[2],
             })
-        return render_template('semuadata.html', data=data, data_api=data_api)
+        return render_template('https://github.com/novazi/website-ews.github.io/blob/main/templates/semuadata.html', data=data, data_api=data_api)
    
     else:
         return redirect(url_for('login'))
@@ -276,7 +276,7 @@ def weekdata():
                 'waktu' : b[1],
                 'pergeseran' : b[2],
             })
-        return render_template('week.html', data=data, data_api=data_api)
+        return render_template('https://github.com/novazi/website-ews.github.io/blob/main/templates/week.html', data=data, data_api=data_api)
    
     else:
         return redirect(url_for('login'))
@@ -328,7 +328,7 @@ def monthdata():
                 'waktu' : b[1],
                 'pergeseran' : b[2],
             })
-        return render_template('month.html', data=data, data_api=data_api)
+        return render_template('https://github.com/novazi/website-ews.github.io/blob/main/templates/month.html', data=data, data_api=data_api)
    
     else:
         return redirect(url_for('login'))
