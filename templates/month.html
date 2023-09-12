@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EWS Longsor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link href='https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 1px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        .button1 {
+            background-color: #af4ca7;
+        }
+        
+        .button2 {
+            background-color: #3340f7;
+        }
+        
+        .button3 {
+            background-color: #aeb0d3;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <a href="/logout" class="btn btn-primary btn-sm">Logout</a>
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h1 class="heading-section">DATA PERGESERAN EWS LONGSOR</h1>
+                    <p style="font-size:20px">
+                        <h3>(BULAN INI)</h3>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <a class="button button1" href="/home" class="btn btn-primary btn-sm">Hari Ini</a>
+                    <a class="button button1" href="/week" class="btn btn-primary btn-sm">Minggu Ini</a>
+                    <a class="button button2" href="/month" class="btn btn-primary btn-sm">Bulan Ini</a>
+                    <a class="button button1" href="/semuadata" class="btn btn-primary btn-sm">Semua Data</a>
+                    <a class="button button3" class="btn btn-primary btn-sm" href="{{url_for('download_report_bulanini')}}">CSV</a>
+                    <h3 class="heading-section"></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table id="empTable" class="table">
+                            <thead class="thead-primary">
+                                <tr>
+                                    <th>Lokasi</th>
+                                    <th>Waktu</th>
+                                    <th>Pergeseran (cm)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data_api %}
+                                <tr>
+                                    <td>{{item['lokasi']}}</td>
+                                    <td>{{item['waktu']}}</td>
+                                    <td>{{item['pergeseran']}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
