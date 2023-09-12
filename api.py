@@ -82,7 +82,7 @@ def gagal():
 # Route untuk Index
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('index.html')
 
 # Route untuk Menambahkan data ke Tabel Lokasi
 @app.route('/add_lokasi', methods = ["POST"])
