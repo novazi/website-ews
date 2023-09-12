@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'asdavi0104'
 
 def cek_user(username, password):
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     # Memilih data di database
     cur.execute('SELECT username,password FROM dbusers WHERE username=? and password=?', (username, password))
@@ -22,7 +22,7 @@ def cek_user(username, password):
         return False
 
 def cek_lokasi(lokasi, lon, lat):
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     # Memilih data di database
     cur.execute('SELECT lokasi, longitude, latitude FROM dblokasi WHERE lokasi=? AND longitude=? AND latitude=?', (lokasi, lon, lat))
@@ -33,7 +33,7 @@ def cek_lokasi(lokasi, lon, lat):
         return False
 
 def getData():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     # Memilih data di database
     cur.execute("SELECT waktu, pergeseran FROM dbdata")# ORDER BY waktu LIMIT 20")
@@ -51,7 +51,7 @@ def getData():
 # Route untuk Menampilkan data terakhir
 @app.route('/cek_data', methods = ["GET"])
 def getDataLine():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     # Memilih data di database
     cur.execute("SELECT waktu, pergeseran FROM dbdata ORDER BY waktu DESC")
@@ -87,7 +87,7 @@ def index():
 # Route untuk Menambahkan data ke Tabel Lokasi
 @app.route('/add_lokasi', methods = ["POST"])
 def add_lokasi():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     json = request.json # data dari request data bentuk json
     id_lokasi = json['id_lokasi']
@@ -110,7 +110,7 @@ def add_lokasi():
 # Route untuk Menambahkan data ke Tabel Data
 @app.route('/add_data', methods = ["GET"])
 def add_data():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     #json = request.json # data dari request data bentuk json
     id_lokasi = request.args.get("lokasi")
@@ -156,7 +156,7 @@ def login():
 @app.route('/home', methods=['POST', 'GET'])
 def home():
     if 'username' in session and 'password' in session:
-        con = sqlite3.connect('database.db') # Menghubungkan ke database
+        con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
         cur = con.cursor()
         cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
         data = cur.fetchall()
@@ -179,7 +179,7 @@ def home():
 
 @app.route('/download/report_hariini/csv')
 def download_report_hariini():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
     data = cur.fetchall()
@@ -208,7 +208,7 @@ def download_report_hariini():
 @app.route('/semuadata', methods=['POST', 'GET'])
 def semuadata():
     if 'username' in session and 'password' in session:
-        con = sqlite3.connect('database.db') # Menghubungkan ke database
+        con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
         cur = con.cursor()
         cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` ORDER by `dbdata`.`waktu` DESC")
         data = cur.fetchall()
@@ -231,7 +231,7 @@ def semuadata():
 
 @app.route('/download/report_semuadata/csv')
 def download_report_semuadata():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` ORDER by `dbdata`.`waktu` DESC")
     data = cur.fetchall()
@@ -260,7 +260,7 @@ def download_report_semuadata():
 @app.route('/week', methods=['POST', 'GET'])
 def weekdata():
     if 'username' in session and 'password' in session:
-        con = sqlite3.connect('database.db') # Menghubungkan ke database
+        con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
         cur = con.cursor()
         cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'weekday 0', '-6 days', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
         data = cur.fetchall()
@@ -283,7 +283,7 @@ def weekdata():
 
 @app.route('/download/report_mingguini/csv')
 def download_report_mingguini():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'weekday 0', '-6 days', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
     data = cur.fetchall()
@@ -312,7 +312,7 @@ def download_report_mingguini():
 @app.route('/month', methods=['POST', 'GET'])
 def monthdata():
     if 'username' in session and 'password' in session:
-        con = sqlite3.connect('database.db') # Menghubungkan ke database
+        con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
         cur = con.cursor()
         cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'start of month', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
         data = cur.fetchall()
@@ -335,7 +335,7 @@ def monthdata():
 
 @app.route('/download/report_bulanini/csv')
 def download_report_bulanini():
-    con = sqlite3.connect('database.db') # Menghubungkan ke database
+    con = sqlite3.connect('https://github.com/novazi/website-ews.github.io/blob/main/database.db') # Menghubungkan ke database
     cur = con.cursor()
     cur.execute("SELECT `dblokasi`.`lokasi`, `dbdata`.`waktu`, `dbdata`.`pergeseran` FROM `dblokasi`, `dbdata` WHERE DATETIME(`dbdata`.`waktu`) >= DATETIME('now', 'start of month', 'start of day', '-7 hours') ORDER by `dbdata`.`waktu` DESC")
     data = cur.fetchall()
